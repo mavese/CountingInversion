@@ -11,8 +11,6 @@ def mergeandcount(lft,rgt):
     """
     i = len(lft) - 1
     j = len(rgt) - 1
-    lft.reverse()
-    rgt.reverse()
     x = len(lft)
     inv = 0
     rls = []
@@ -28,10 +26,8 @@ def mergeandcount(lft,rgt):
             x -= 1
             rls.append(lft.pop())
             i -= 1
-    lft.reverse()
-    rgt.reverse()
-    rls.extend(lft or rgt)
-    return (inv, rls)
+    rls.reverse()
+    return (inv, (lft or rgt) + rls)
 
 
 def sortandcount(seq):
