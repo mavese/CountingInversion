@@ -9,7 +9,21 @@ def mergeandcount(lft,rgt):
     Input: two ordered sequences lft and rgt
     Output: tuple (number inversions, sorted combined sequence)
     """
-    
+    i = 0
+    j = 0
+    x = len(lft)
+    inv = 0
+    rls = []
+    while len(lft) > i and len(rgt) > j:
+        if rgt[j] < lft[i]:
+            inv += x
+            j += 1
+            rls.append(rgt[j])
+        else:
+            x -= 1
+            i += 1
+            rls.append(lft[i])
+    return(inv, rls + (lft or rgt))
 
 
 def sortandcount(seq):
@@ -19,6 +33,14 @@ def sortandcount(seq):
     Input: ordered sequence seq
     Output: tuple (number inversions, sequence)
     """
+    if len(seq) <= 1:
+        return (0, seq)
+
+    mid = len(seq)/2
+    lft = sortandcount(seq[:mid])
+    rgt = sortandcount(seq[mid:])
+    return(mergeandcount(lft, rgt))
+
     
 
 if __name__ =="__main__":
@@ -55,15 +77,16 @@ if __name__ =="__main__":
              (8,"Coldplay: Clocks"),
              (10,"Garth Brooks: Friends in Low Places"),
              (9,"Nickelback: Gotta be Somebody")]
-    print seq1
-    print "# Inversions: %i\n" %sortandcount(seq1)[0]
-    print seq2
-    print "# Inversions: %i\n" %sortandcount(seq2)[0]
-    print seq3
-    print "# Inversions: %i\n" %sortandcount(seq3)[0]
-    print songs1
-    print "# Inversions: %i\n" %sortandcount(songs1)[0]
-    print songs2
-    print "# Inversions: %i\n" %sortandcount(songs2)[0]
-    print songs3
-    print "# Inversions: %i\n" %sortandcount(songs3)[0]
+    # print seq1
+    # print "# Inversions: %i\n" %sortandcount(seq1)[0]
+    # print seq2
+    # print "# Inversions: %i\n" %sortandcount(seq2)[0]
+    # print seq3
+    # print "# Inversions: %i\n" %sortandcount(seq3)[0]
+    # print songs1
+    # print "# Inversions: %i\n" %sortandcount(songs1)[0]
+    # print songs2
+    # print "# Inversions: %i\n" %sortandcount(songs2)[0]
+    # print songs3
+    # print "# Inversions: %i\n" %sortandcount(songs3)[0]
+    print(sortandcount(seq1))
