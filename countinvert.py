@@ -1,4 +1,4 @@
-#Matthew Mantese
+#Matthew Mantese Joshua Ridgway
 
 from collections import deque
 import itertools
